@@ -23,7 +23,7 @@ public class NodesStackAndQueue<T> {
 	 * @return true if the stack / queue is empty
 	 */
 	public boolean isEmpty() {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		return head == null;
 	}
 
 	/**
@@ -34,8 +34,12 @@ public class NodesStackAndQueue<T> {
 	 *            the element to be "pushed"
 	 */
 	public void push(T element) {
-		Node n = new Node(element);
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n = new Node<T>(element);
+		if (!isEmpty()) {
+			n.setNext(head);
+		}
+		head = n;
+
 
 	}
 
@@ -48,8 +52,15 @@ public class NodesStackAndQueue<T> {
 	 * @throws EmptyStackException
 	 *             if the stack is empty
 	 */
-	public Node pop() throws EmptyStackException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	public T pop() throws EmptyStackException {
+		if(isEmpty()){
+			throw new EmptyStackException();
+		}
+
+		Node<T> n = head;
+		head = head.getNext();
+		return n.getValue();
+
 	}
 
 	/**
@@ -60,8 +71,12 @@ public class NodesStackAndQueue<T> {
 	 * @throws EmptyStackException
 	 *             if the stack is empty
 	 */
-	public Node peek() throws EmptyStackException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	public T peek() throws EmptyStackException {
+		if(isEmpty()){
+			throw new EmptyStackException();
+		}
+		return head.getValue();
+
 	}
 
 	/**
@@ -72,7 +87,17 @@ public class NodesStackAndQueue<T> {
 	 *            the element to be appended
 	 */
 	public void append(T element) {
-		Node n = new Node(element);
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n = new Node<T>(element);
+		if(isEmpty()){
+			head = n;
+		}else{
+			Node<T> i = head;
+			while(i.getNext() != null){
+				i = i.getNext();
+			}
+			i.setNext(n);
+
+		}
+
 	}
 }
