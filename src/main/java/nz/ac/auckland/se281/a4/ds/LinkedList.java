@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281.a4.ds;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.NoSuchElementException;
 //*******************************
 //YOU SHOUD MODIFY THE SPECIFIED 
@@ -127,7 +129,27 @@ public class LinkedList<T> {
 	 *             size-1
 	 */
 	public void insert(int pos, T element) throws InvalidPositionException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n1 = new Node<T>(element);
+		Node<T> n = head;
+		if(pos == 0){
+			n1.setNext(head);
+			head = n1;
+			return;
+		}
+
+		while(pos>1){
+			try{
+				n = n.getNext();
+				pos--;
+			}catch (NullPointerException e){
+				throw new InvalidPositionException();
+			}
+
+		}
+		n1.setNext(n.getNext());
+		n.setNext(n1);
+
+
 
 	}
 
@@ -139,7 +161,14 @@ public class LinkedList<T> {
 	 *            an integer, which is the position
 	 */
 	public void remove(int pos) throws InvalidPositionException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n1 = locateNode(pos);
+		if(pos == 0){
+			head = n1.getNext();
+		}else{
+			Node<T> n2 = locateNode(pos -1);
+			n2.setNext(n1.getNext());
+		}
+
 
 	}
 
@@ -150,7 +179,13 @@ public class LinkedList<T> {
 	 * @return the size of the list
 	 */
 	public int size() {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		int i = 0;
+		Node<T> n = head;
+		while(n != null){
+			n = n.getNext();
+			i++;
+		}
+		return i;
 	}
 
 	/**
