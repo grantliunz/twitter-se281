@@ -42,8 +42,18 @@ public class LinkedList<T> {
 	 *             if the element does not exist in the
 	 *             LinkedList
 	 */
-	private Node locateNode(int pos) throws InvalidPositionException, NoSuchElementException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+	private Node<T> locateNode(int pos) throws InvalidPositionException{
+		if(pos < 0){
+			throw new InvalidPositionException();
+		}
+		Node<T> n = head;
+		while(n != null){
+			if(pos-- == 0){
+				return n;
+			}
+			n = n.getNext();
+		}
+		throw new InvalidPositionException();
 	}
 
 	/**
@@ -54,8 +64,13 @@ public class LinkedList<T> {
 	 *            a parameter, which is the value of the node to be prepended
 	 */
 	public void prepend(T element) {
-		Node n = new Node(element);
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n = new Node<T>(element);
+		if (head != null) {
+			n.setNext(head);
+		}
+		head = n;
+
+
 
 	}
 
@@ -70,8 +85,17 @@ public class LinkedList<T> {
 	// Note this method has been refactored using the helper methods
 	// I will do this as a small ACP exercise in class
 	public void append(T element) {
-		Node t = new Node(element);
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		Node<T> n = new Node<T>(element);
+		if(head==null){
+			head = n;
+		}else{
+			Node<T> i = head;
+			while(i.getNext() != null){
+				i = i.getNext();
+			}
+			i.setNext(n);
+
+		}
 
 	}
 
@@ -87,7 +111,7 @@ public class LinkedList<T> {
 	 *             size-1
 	 */
 	public T get(int pos) throws InvalidPositionException {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		return locateNode(pos).getValue();
 	}
 
 	/**
