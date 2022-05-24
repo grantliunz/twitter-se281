@@ -77,9 +77,8 @@ public class Graph {
 	 * @return true if the set and relation are reflexive
 	 */
 	public boolean isReflexive(List<String> set, List<String> relation) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
-
-	}
+		// Each element in set in format {1}
+		//relation in format {1,2}
 
 	/**
 	 * This method returns a boolean based on whether the

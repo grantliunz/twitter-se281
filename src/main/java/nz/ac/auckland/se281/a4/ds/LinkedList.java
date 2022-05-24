@@ -45,10 +45,14 @@ public class LinkedList<T> {
 	 *             LinkedList
 	 */
 	private Node<T> locateNode(int pos) throws InvalidPositionException{
+
+		// Negative numbers are invalid
 		if(pos < 0){
 			throw new InvalidPositionException();
 		}
 		Node<T> n = head;
+
+		//Traverses the list
 		while(n != null){
 			if(pos-- == 0){
 				return n;
@@ -131,12 +135,14 @@ public class LinkedList<T> {
 	public void insert(int pos, T element) throws InvalidPositionException {
 		Node<T> n1 = new Node<T>(element);
 		Node<T> n = head;
+		//Checks if insert is at very start of LL
 		if(pos == 0){
 			n1.setNext(head);
 			head = n1;
 			return;
 		}
 
+		//Loops to find the pointer of node 1 position before pos
 		while(pos>1){
 			try{
 				n = n.getNext();
