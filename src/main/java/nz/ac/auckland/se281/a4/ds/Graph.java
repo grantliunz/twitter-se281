@@ -107,6 +107,7 @@ public class Graph {
 			StringBuilder sb=new StringBuilder(element);
 			sb.reverse();
 			if(!relation.contains(sb.toString())){
+				System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n",sb.toString()) ;
 				return false;
 			}
 		}
@@ -130,7 +131,21 @@ public class Graph {
 	 * @return true if the relation is transitive
 	 */
 	public boolean isTransitive(List<String> relation) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		for(String element:relation){
+			String nodeA = element.substring(0,1);
+			String nodeB = element.substring(2);
+			for(String element1:relation){
+				if(element1.substring(0, 1).equals(nodeB)){
+					String nodeC = element1.substring(2);
+					if(!relation.contains(nodeA + "," + nodeC )){
+						System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n",nodeA + "," + nodeC ) ;
+						return false;
+					}
+				}
+			}
+
+		}
+		return true;
 
 	}
 
@@ -147,7 +162,7 @@ public class Graph {
 	 * @return true if the set and relation are anti-symmetric
 	 */
 	public boolean isEquivalence(List<String> set, List<String> relation) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		return(isReflexive(set,relation) && isSymmetric(relation) && isTransitive(relation));
 	}
 
 	/**
