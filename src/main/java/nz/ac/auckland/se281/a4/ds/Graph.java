@@ -184,7 +184,18 @@ public class Graph {
 	 * @return List that is the equivalence class
 	 */
 	public List<String> computeEquivalence(String node, List<String> set, List<String> relation) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+
+		if(!isEquivalence(set, relation)){
+			System.out.println("Can't compute equivalence class as this is not an equivalence relation");
+			return null;
+		}
+		List<String> eqClass = new ArrayList<>();
+		for(String element : relation){
+			if(element.substring(0,1).equals(node)){
+				eqClass.add(element.substring(2));
+			}
+		}
+		return eqClass;
 	}
 
 	/**
