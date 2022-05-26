@@ -77,8 +77,9 @@ public class Graph {
 	 * @return true if the set and relation are reflexive
 	 */
 	public boolean isReflexive(List<String> set, List<String> relation) {
-		// Each element in set in format {1}
-		//relation in format {1,2}
+		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+
+	}
 
 	/**
 	 * This method returns a boolean based on whether the
@@ -166,7 +167,7 @@ public class Graph {
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch() {
-		return breadthFirstSearch(root);
+		return breadthFirstSearch(root, false);
 	}
 
 	/**
@@ -177,7 +178,7 @@ public class Graph {
 	 *            A "TwitterHandle" in the graph
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
-	public List<Node<String>> breadthFirstSearch(Node<String> start) {// name to breadthFirstSearch
+	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
 		throw new java.lang.UnsupportedOperationException("Not supported yet.");
 
 	}
@@ -189,7 +190,7 @@ public class Graph {
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch() {
-		return depthFirstSearch(root);
+		return depthFirstSearch(root, false);
 	}
 
 	/**
@@ -200,7 +201,7 @@ public class Graph {
 	 *            A "TwitterHandle" in the graph
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
-	public List<Node<String>> depthFirstSearch(Node<String> start) {
+	public List<Node<String>> depthFirstSearch(Node<String> start, boolean rooted) {
 		throw new java.lang.UnsupportedOperationException("Not supported yet.");
 	}
 

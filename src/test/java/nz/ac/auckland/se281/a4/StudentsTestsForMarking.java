@@ -4,8 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,31 +23,33 @@ import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.google.gson.JsonIOException;
+
 import nz.ac.auckland.se281.a4.cli.*;
 import nz.ac.auckland.se281.a4.ds.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		TestsForMarking.Task1NodeStackAndQueueTest.class,
-		TestsForMarking.Task1NodeStackAndQueueGenericsTest.class,
-		TestsForMarking.Task1NodeStackAndQueueExceptionTest.class,
+	StudentsTestsForMarking.Task1NodeStackAndQueueTest.class,
+	StudentsTestsForMarking.Task1NodeStackAndQueueGenericsTest.class,
+	StudentsTestsForMarking.Task1NodeStackAndQueueExceptionTest.class,
 
-		TestsForMarking.Task2LinkedListTest.class,
-		TestsForMarking.Task2LinkedListGenericsTest.class,
+	StudentsTestsForMarking.Task2LinkedListTest.class,
+	StudentsTestsForMarking.Task2LinkedListGenericsTest.class,
 
-		TestsForMarking.Task3ReflexiveTest.class,
-		TestsForMarking.Task3SymmetricTest.class,
-		TestsForMarking.Task3TransitiveTest.class,
-		TestsForMarking.Tast3EquivalenceTest.class,
-		TestsForMarking.Task3EquivalenceClassTest.class,
-		TestsForMarking.Task3BFSTest.class,
-		TestsForMarking.Task3DFSTest.class,
+	StudentsTestsForMarking.Task3ReflexiveTest.class,
+	StudentsTestsForMarking.Task3SymmetricTest.class,
+	StudentsTestsForMarking.Task3TransitiveTest.class,
+	StudentsTestsForMarking.Tast3EquivalenceTest.class,
+	StudentsTestsForMarking.Task3EquivalenceClassTest.class,
+	StudentsTestsForMarking.Task3BFSTest.class,
+	StudentsTestsForMarking.Task3DFSTest.class,
 
-		TestsForMarking.Task4SearchTweetTest.class,
+	StudentsTestsForMarking.Task4SearchTweetTest.class,
 
 })
-public class TestsForMarking {
+public class StudentsTestsForMarking {
 	/**
 	 * NodeStackAndQueue
 	 */
@@ -59,83 +64,49 @@ public class TestsForMarking {
 
 		@Test
 		public void T1_01_Stack_Is_Empty() {
-			try {
-				assertEquals(true, stack.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			assertEquals(true, stack.isEmpty());
 		}
 
 		@Test
 		public void T1_02_Stack_Is_Not_Empty() {
-			try {
-				stack.append(new TwitterHandle("1"));
-				assertEquals(false, stack.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
-
+			stack.append(new TwitterHandle("1"));
+			assertEquals(false, stack.isEmpty());
 		}
 
 		@Test
 		public void T1_03_Stack_Push() {
-
-			try {
-				stack.push(new TwitterHandle("5"));
-				stack.push(new TwitterHandle("6"));
-				assertEquals(new TwitterHandle("6"), stack.peek());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-
-			}
+			stack.push(new TwitterHandle("5"));
+			stack.push(new TwitterHandle("6"));
+			assertEquals(new TwitterHandle("6"), stack.peek());
 
 		}
 
 		@Test
 		public void T1_04_Stack_Pop() {
-			try {
-				stack.push(new TwitterHandle("5"));
-				stack.push(new TwitterHandle("6"));
-				assertEquals(new TwitterHandle("6"), stack.pop());
-				assertEquals(new TwitterHandle("5"), stack.pop());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
-
+			stack.push(new TwitterHandle("5"));
+			stack.push(new TwitterHandle("6"));
+			assertEquals(new TwitterHandle("6"), stack.pop());
+			assertEquals(new TwitterHandle("5"), stack.pop());
 		}
 
 		@Test
 		public void T1_05_Queue_Is_Empty() {
-			try {
-				NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
-				assertEquals(true, queue.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
-
+			NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
+			assertEquals(true, queue.isEmpty());
 		}
 
 		@Test
 		public void T1_05_Queue_Is_Not_Empty() {
-			try {
-				NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
-				queue.append(new TwitterHandle("4"));
-				assertEquals(false, queue.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
-
+			NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
+			queue.append(new TwitterHandle("4"));
+			assertEquals(false, queue.isEmpty());
 		}
 
 		@Test
 		public void T1_07_Queue_Append() {
-			try {
-				NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
-				queue.append(new TwitterHandle("5"));
-				assertEquals(new TwitterHandle("5"), queue.pop());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<TwitterHandle> queue = new NodesStackAndQueue<TwitterHandle>();
+			queue.append(new TwitterHandle("5"));
+			assertEquals(new TwitterHandle("5"), queue.pop());
 		}
 	}
 
@@ -146,81 +117,54 @@ public class TestsForMarking {
 	public static class Task1NodeStackAndQueueGenericsTest {
 		@Test
 		public void T1_08_Is_Empty() {
-			try {
-				NodesStackAndQueue<Integer> stack = new NodesStackAndQueue<Integer>();
-				assertEquals(true, stack.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Integer> stack = new NodesStackAndQueue<Integer>();
+			assertEquals(true, stack.isEmpty());
 		}
 
 		@Test
 		public void T1_09_Is_Not_Empty() {
-			try {
-				NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
-				stack.push(4.0);
-				assertEquals(false, stack.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
+			stack.push(4.0);
+			assertEquals(false, stack.isEmpty());
 		}
 
 		@Test
 		public void T1_10_Push() {
-			try {
-				NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
-				stack.push(4.0);
-				assertEquals((Double) 4.0, stack.peek());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
+			stack.push(4.0);
+			assertEquals((Double) 4.0, stack.peek());
 		}
 
 		@Test
 		public void T1_11_Pop() {
-			try {
-				NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
-				stack.push(4.0);
-				stack.push(5.0);
-				assertEquals((Double) 5.0, stack.pop());
-				assertEquals((Double) 4.0, stack.pop());
-				assertEquals(stack.isEmpty(), true);
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> stack = new NodesStackAndQueue<Double>();
+			stack.push(4.0);
+			stack.push(5.0);
+			assertEquals((Double) 5.0, stack.pop());
+			assertEquals((Double) 4.0, stack.pop());
+			assertEquals(stack.isEmpty(), true);
 		}
 
 		@Test
 		public void T1_12_Is_Empty() {
-			try {
-				NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
-				assertEquals(true, queue.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
+			assertEquals(true, queue.isEmpty());
 		}
 
 		@Test
 		public void T1_13_Is_Not_Empty() {
-			try {
-				NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
-				queue.append((Double) 4.0);
-				assertEquals(false, queue.isEmpty());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
+			queue.append((Double) 4.0);
+			assertEquals(false, queue.isEmpty());
 		}
 
 		@Test
 		public void T1_14_Append() {
-			try {
-				NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
-				queue.append((Double) 4.0);
-				assertEquals(queue.pop(), (Double) (4.0));
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
+			queue.append((Double) 4.0);
+			assertEquals(queue.pop(), (Double)(4.0));
 		}
+
 
 	}
 
@@ -241,6 +185,8 @@ public class TestsForMarking {
 			} catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
 			}
+
+			
 		}
 
 		@Test()
@@ -280,97 +226,86 @@ public class TestsForMarking {
 	public static class Task2LinkedListTest {
 		@Test
 		public void T2_01_Is_Empty() {
-			try {
-				LinkedList<TwitterHandle> edges = new LinkedList<TwitterHandle>();
-				assertEquals(0, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<TwitterHandle> edges = new LinkedList<TwitterHandle>();
+			assertEquals(0, edges.size());
 		}
 
 		@Test
 		public void T2_02_Is_Not_Empty() {
-			try {
-				LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
-				edges.append(new Edge<TwitterHandle>(new TwitterHandle("1"), new TwitterHandle("2")));
-				assertEquals(1, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+			edges.append(new Edge<TwitterHandle>(new TwitterHandle("1"), new TwitterHandle("2")));
+			assertEquals(1, edges.size());
 		}
 
 		@Test
 		public void T2_03_Append() {
-			try {
-				LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
-				edges.append(new Edge<TwitterHandle>(new TwitterHandle("1"), new TwitterHandle("2")));
-				assertEquals(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")), edges.get(0));
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+			edges.append(new Edge<TwitterHandle>(new TwitterHandle("1"), new TwitterHandle("2")));
+			assertEquals(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")), edges.get(0));
 		}
 
 		@Test
 		public void T2_04_Get() {
-			try {
-				LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
 
-				for (int i = 0; i < 10; i++) {
-					edges.append(new Edge<>(new TwitterHandle(String.format("%d", i)),
-							new TwitterHandle(String.format("%d", i + 1))));
-					assertEquals(new Edge<>(new TwitterHandle(String.format("%d", i)),
-							new TwitterHandle(String.format("%d", i + 1))), edges.get(i));
-				}
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
+			for (int i = 0; i < 10; i++) {
+				edges.append(new Edge<>(new TwitterHandle(String.format("%d", i)),
+						new TwitterHandle(String.format("%d", i + 1))));
+				assertEquals(new Edge<>(new TwitterHandle(String.format("%d", i)),
+						new TwitterHandle(String.format("%d", i + 1))), edges.get(i));
+			}
+		}
+
+		@Test
+		public void T2_05_Prepend() {
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+
+			for (int i = 0; i < 10; i++) {
+				edges.prepend(new Edge<>(new TwitterHandle(String.format("%d", i)),
+						new TwitterHandle(String.format("%d", i + 1))));
+				assertEquals(new Edge<>(new TwitterHandle(String.format("%d", i)),
+						new TwitterHandle(String.format("%d", i + 1))), edges.get(0));
 			}
 		}
 
 		@Test
 		public void T2_06_Size() {
-			try {
-				LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
-				assertEquals(0, edges.size());
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+			assertEquals(0, edges.size());
 
-				for (int i = 0; i < 10; i++) {
-					edges.append(new Edge<>(new TwitterHandle(String.format("%d", i)),
-							new TwitterHandle(String.format("%d", i + 1))));
-					assertEquals(i + 1, edges.size());
-				}
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
+			for (int i = 0; i < 10; i++) {
+				edges.append(new Edge<>(new TwitterHandle(String.format("%d", i)),
+						new TwitterHandle(String.format("%d", i + 1))));
+				assertEquals(i + 1, edges.size());
 			}
 		}
 
 		@Test
 		public void T2_07_Remove() {
-			try {
-				LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
-				edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
-				edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
-				edges.remove(0);
-				assertEquals(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")), edges.get(0));
-				assertEquals(1, edges.size());
+			LinkedList<Edge<TwitterHandle>> edges = new LinkedList<Edge<TwitterHandle>>();
+			edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
+			edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
+			edges.remove(0);
+			assertEquals(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")), edges.get(0));
+			assertEquals(1, edges.size());
 
-				edges = new LinkedList<Edge<TwitterHandle>>();
-				edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
-				edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
-				edges.remove(1);
-				assertEquals(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")), edges.get(0));
-				assertEquals(1, edges.size());
+			edges = new LinkedList<Edge<TwitterHandle>>();
+			edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
+			edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
+			edges.remove(1);
+			assertEquals(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")), edges.get(0));
+			assertEquals(1, edges.size());
 
-				edges = new LinkedList<Edge<TwitterHandle>>();
-				edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
-				edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
-				edges.append(new Edge<>(new TwitterHandle("5"), new TwitterHandle("6")));
-				edges.remove(2);
-				edges.remove(0);
-				assertEquals(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")), edges.get(0));
-				assertEquals(1, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			edges = new LinkedList<Edge<TwitterHandle>>();
+			edges.append(new Edge<>(new TwitterHandle("1"), new TwitterHandle("2")));
+			edges.append(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")));
+			edges.append(new Edge<>(new TwitterHandle("5"), new TwitterHandle("6")));
+			edges.remove(2);
+			edges.remove(0);
+			assertEquals(new Edge<>(new TwitterHandle("3"), new TwitterHandle("4")), edges.get(0));
+			assertEquals(1, edges.size());
 		}
+
 	}
 
 	/**
@@ -380,80 +315,56 @@ public class TestsForMarking {
 	public static class Task2LinkedListGenericsTest {
 		@Test
 		public void T2_09_Is_Empty() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
-				assertEquals(0, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Integer> edges = new LinkedList<Integer>();
+			assertEquals(0, edges.size());
 		}
 
 		@Test
 		public void T2_10_Is_Not_Empty() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
-				edges.append(1);
-				assertEquals(1, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Integer> edges = new LinkedList<Integer>();
+			edges.append(1);
+			assertEquals(1, edges.size());
 		}
 
 		@Test
 		public void T2_11_Append() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
-				edges.append(1);
-				assertEquals((Integer) 1, edges.get(0));
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Integer> edges = new LinkedList<Integer>();
+			edges.append(1);
+			assertEquals((Integer) 1, edges.get(0));
 		}
 
 		@Test
 		public void T2_12_Get() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
+			LinkedList<Integer> edges = new LinkedList<Integer>();
 
-				for (int i = 0; i < 10; i++) {
-					edges.append(i);
-					assertEquals((Integer) i, edges.get(i));
-				}
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
+			for (int i = 0; i < 10; i++) {
+				edges.append(i);
+				assertEquals((Integer) i, edges.get(i));
 			}
 		}
 
 		@Test
 		public void T2_15_Remove() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
-				edges.append(1);
-				edges.append(2);
-				edges.remove(0);
-				assertEquals((Integer) 2, edges.get(0));
-				assertEquals(1, edges.size());
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			LinkedList<Integer> edges = new LinkedList<Integer>();
+			edges.append(1);
+			edges.append(2);
+			edges.remove(0);
+			assertEquals((Integer) 2, edges.get(0));
+			assertEquals(1, edges.size());
 		}
 
 		@Test
 		public void T2_16_Insert() {
-			try {
-				LinkedList<Integer> edges = new LinkedList<Integer>();
-				edges.insert(0, 1);
-				assertEquals((Integer) 1, edges.get(0));
+			LinkedList<Integer> edges = new LinkedList<Integer>();
+			edges.insert(0, 1);
+			assertEquals((Integer) 1, edges.get(0));
 
-				edges = new LinkedList<Integer>();
-				edges.append(-1);
+			edges = new LinkedList<Integer>();
+			edges.append(-1);
 
-				for (int i = 0; i < 10; i++) {
-					edges.insert(1, i);
-					assertEquals((Integer) i, edges.get(1));
-				}
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
+			for (int i = 0; i < 10; i++) {
+				edges.insert(1, i);
+				assertEquals((Integer) i, edges.get(1));
 			}
 		}
 	}
@@ -474,7 +385,7 @@ public class TestsForMarking {
 			} catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
 			}
-
+		
 		}
 
 		@Test()
@@ -533,7 +444,7 @@ public class TestsForMarking {
 			try {
 				controller.processCommand("open " + fileName);
 				assertEquals(file2result.get(fileName), controller.processCommand("check " + command).get(1));
-			} catch (Exception e) {
+			}  catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
 			}
 		}
@@ -785,11 +696,11 @@ public class TestsForMarking {
 			graphUI.open(filename);
 			try {
 				TweetGraph tweetGraph = new TweetGraph(graphUI.getRelationElements(), graphUI.loadTweets(),
-						Dataloader.allocateTweetsToUsers(new Graph(graphUI.getRelationElements()).getUsersFromNodes(),
-								graphUI.loadTweets()));
-
-				List<String> result = tweetGraph.computeEquivalence(command, graphUI.getSetElements(),
-						graphUI.getRelationElements());
+					Dataloader.allocateTweetsToUsers(new Graph(graphUI.getRelationElements()).getUsersFromNodes(), graphUI.loadTweets()));
+				
+				List<String> result = tweetGraph.computeEquivalence(command, graphUI.getSetElements(), graphUI.getRelationElements());
+				Collections.sort(expected);
+				Collections.sort(result);
 				assertEquals(expected, result);
 
 			} catch (Exception e) {
@@ -805,13 +716,11 @@ public class TestsForMarking {
 		@Test
 		public void T3_32_C() {
 			runTest("c.txt", "1");
-			runTestGraph("c.txt", "1", new ArrayList<String>() {
-				{
-					add("2");
-					add("3");
-					add("1");
-				}
-			});
+			runTestGraph("c.txt" , "1", new ArrayList<String>(){{
+				add("2");
+				add("3");
+				add("1");
+			}});
 		}
 
 		@Test
@@ -844,8 +753,8 @@ public class TestsForMarking {
 			file2result_BFS.put("c.txt", new ArrayList<TwitterHandle>() {
 				{
 					add(new TwitterHandle("0"));
-					add(new TwitterHandle("1"));
 					add(new TwitterHandle("2"));
+					add(new TwitterHandle("1"));
 					add(new TwitterHandle("3"));
 				}
 			});
@@ -865,14 +774,10 @@ public class TestsForMarking {
 		}
 
 		private void runTest(String fileName) {
-			try {
-				graphUI.open(fileName);
-				Graph graph = new Graph(graphUI.getRelationElements());
-				List<Node<String>> result = graph.breadthFirstSearch();
-				assertEquals(file2result_BFS.get(fileName), result);
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			graphUI.open(fileName);
+			Graph graph = new Graph(graphUI.getRelationElements());
+			List<Node<String>> result = graph.breadthFirstSearch();
+			assertEquals(file2result_BFS.get(fileName), result);
 		}
 
 		@Before
@@ -894,7 +799,6 @@ public class TestsForMarking {
 		public void T3_50_F() {
 			runTest("f.txt");
 		}
-
 	}
 
 	/**
@@ -921,9 +825,9 @@ public class TestsForMarking {
 			file2result_DFS.put("c.txt", new ArrayList<TwitterHandle>() {
 				{
 					add(new TwitterHandle("0"));
-					add(new TwitterHandle("1"));
-					add(new TwitterHandle("3"));
 					add(new TwitterHandle("2"));
+					add(new TwitterHandle("3"));
+					add(new TwitterHandle("1"));
 
 				}
 			});
@@ -944,14 +848,10 @@ public class TestsForMarking {
 		}
 
 		private void runTest(String fileName) {
-			try {
-				graphUI.open(fileName);
-				Graph graph = new Graph(graphUI.getRelationElements());
-				List<Node<String>> result = graph.depthFirstSearch();
-				assertEquals(file2result_DFS.get(fileName), result);
-			} catch (Exception e) {
-				fail("Exception thrown: " + e.getMessage());
-			}
+			graphUI.open(fileName);
+			Graph graph = new Graph(graphUI.getRelationElements());
+			List<Node<String>> result = graph.depthFirstSearch();
+			assertEquals(file2result_DFS.get(fileName), result);
 		}
 
 		@Before
@@ -973,7 +873,6 @@ public class TestsForMarking {
 		public void T3_57_F() {
 			runTest("f.txt");
 		}
-
 	}
 
 	/**
@@ -987,15 +886,15 @@ public class TestsForMarking {
 
 			file2result_tweet_search.put("a.txt",
 					"The tweet string found is: Some month worryed under some chill by any step-grandmother mated the path.\n"
-							+ "User Miss Natalie Bruen tweeted mother");
+							+ "User Miss Natalie Bruen {0} tweeted mother");
 
 			file2result_tweet_search.put("c.txt",
-					"The tweet string found is: A trial mixed ago some c-clamp of any otter sparked a ex-husband.\n"
-							+ "User Chance Hermann tweeted otter");
+					"The tweet string found is: Any psychology landed into one otter on the branch invited any squirrel.\n"
+							+ "User Lauretta Crona {2} tweeted otter");
 
 			file2result_tweet_search.put("f.txt",
 					"The tweet string found is: A girl afforded towards any bonsai over a jumper stroked the otter.\n"
-							+ "User Hailey Bartoletti tweeted girl");
+							+ "User Hailey Bartoletti {7} tweeted girl");
 
 		}
 
@@ -1006,7 +905,8 @@ public class TestsForMarking {
 				TweetGraph graph = new TweetGraph(graphUI.getRelationElements(), graphUI.loadTweets(),
 						Dataloader.allocateTweetsToUsers(new Graph(graphUI.getRelationElements()).getUsersFromNodes(),
 								graphUI.loadTweets()));
-				graph.searchTweet(new TwitterHandle(user), keyword);
+				String tweet = graph.searchTweet(new TwitterHandle(user), keyword);
+				assertEquals(file2result_tweet_search.get(fileName), tweet);
 
 			} catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
@@ -1015,17 +915,17 @@ public class TestsForMarking {
 		}
 
 		@Test
-		public void T4_01_A() {
+		public void T3_01_A() {
 			runTest("a.txt", "0", "mother");
 		}
 
 		@Test
-		public void T4_03_C() {
+		public void T3_03_C() {
 			runTest("c.txt", "2", "otter");
 		}
-
+		
 		@Test
-		public void T4_06_F() {
+		public void T3_06_F() {
 			runTest("f.txt", "7", "girl");
 		}
 	}
