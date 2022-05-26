@@ -77,7 +77,12 @@ public class Graph {
 	 * @return true if the set and relation are reflexive
 	 */
 	public boolean isReflexive(List<String> set, List<String> relation) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		for(String element : set){
+			if(!relation.contains(element+","+element)){
+				return false;
+			}
+		}
+		return true;
 
 	}
 
@@ -98,7 +103,14 @@ public class Graph {
 	 * @return true if the relation is symmetric
 	 */
 	public boolean isSymmetric(List<String> relation) {
-		throw new java.lang.UnsupportedOperationException();
+		for(String element: relation){
+			StringBuilder sb=new StringBuilder(element);
+			sb.reverse();
+			if(!relation.contains(sb.toString())){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
