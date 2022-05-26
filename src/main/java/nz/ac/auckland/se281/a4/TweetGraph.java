@@ -1,12 +1,12 @@
 package nz.ac.auckland.se281.a4;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import nz.ac.auckland.se281.a4.ds.Edge;
 import nz.ac.auckland.se281.a4.ds.Graph;
+import nz.ac.auckland.se281.a4.ds.LinkedList;
 import nz.ac.auckland.se281.a4.ds.Node;
+import nz.ac.auckland.se281.a4.ds.NodesStackAndQueue;
 
 //*******************************
 //YOU SHOUD MODIFY THE SPECIFIED 
@@ -43,6 +43,21 @@ public class TweetGraph extends Graph {
 
 	// search for a keyword in a tweet starting from a given node
 	public String searchTweet(TwitterHandle user, String tweetKeyword) {
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		List<Node<String>> userList = depthFirstSearch(user, false);
+		for (Node<String> node : userList) {
+			TwitterHandle handle = (TwitterHandle) node;
+			List<String> tweets = getTweetsTexts(handle);
+			for(String tweet : tweets){
+				if(tweet.contains(tweetKeyword)){
+					return "The tweet string found is: " + tweet + "\nUser " + handle.getName() + " {" + handle.getID() + "} tweeted " + tweetKeyword;
+				}
+			}
+
+		}
+		return "No successor of " + user.toString() + "tweeted " + tweetKeyword;
+
+
 	}
 }
+
+
