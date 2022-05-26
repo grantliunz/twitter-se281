@@ -217,8 +217,37 @@ public class Graph {
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
-		throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		List<Node<String>> arr = new ArrayList<>();
+		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
+		queue.append(start);
+		Set<Node<String>> allNodes = adjacencyMap.keySet();
+		while(arr.size()!= allNodes.size()) {
+			while (!queue.isEmpty()) {
+				Node<String> node = queue.pop();
+				if (!arr.contains(node)) {
+					arr.add(node);
+				}
+				LinkedList<Edge<Node<String>>> edgeList = adjacencyMap.get(node);
+				Node<Edge<Node<String>>> edgeNode = edgeList.getHead();
+				while (edgeNode != null) {
+					if (!arr.contains(edgeNode.getValue().getTarget())) {
+						queue.append(edgeNode.getValue().getTarget());
+					}
+					edgeNode = edgeNode.getNext();
+				}
 
+
+			}
+			for(Node<String> n : allNodes){
+				if(!arr.contains(n)){
+					queue.append(n);
+					break;
+				}
+			}
+		}
+
+
+		return arr;
 	}
 
 	/**

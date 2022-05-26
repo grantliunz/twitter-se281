@@ -206,4 +206,8 @@ public class LinkedList<T> {
 			node = node.getNext();
 		}
 	}
+
+	public Node<T> getHead() {
+		return head;
+	}
 }
