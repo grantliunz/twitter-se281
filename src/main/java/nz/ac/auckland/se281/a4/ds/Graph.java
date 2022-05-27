@@ -201,35 +201,7 @@ public class Graph {
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
-		List<Node<String>> arr = new ArrayList<>();
-		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
-		queue.append(start);
-		Set<Node<String>> allNodes = adjacencyMap.keySet();
-		while (arr.size() != allNodes.size()) {
-			while (!queue.isEmpty()) {
-				Node<String> node = queue.pop();
-				if (!arr.contains(node)) {
-					arr.add(node);
-				}
-				LinkedList<Edge<Node<String>>> edgeList = adjacencyMap.get(node);
-				Node<Edge<Node<String>>> edgeNode = edgeList.getHead();
-				while (edgeNode != null) {
-					if (!arr.contains(edgeNode.getValue().getTarget())) {
-						queue.append(edgeNode.getValue().getTarget());
-					}
-					edgeNode = edgeNode.getNext();
-				}
-
-			}
-			for (Node<String> n : allNodes) {
-				if (!arr.contains(n)) {
-					queue.append(n);
-					break;
-				}
-			}
-		}
-
-		return arr;
+		return graphSearch(start, "bfs");
 	}
 
 	/**
@@ -248,9 +220,23 @@ public class Graph {
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch(Node<String> start, boolean rooted) {
+		return graphSearch(start, "dfs");
+	}
+
+	/**
+	 * Searches the graph based with either dfs or bfs, implementing a node/queue
+	 *
+	 * @param start A "TwitterHandle" in the graph
+	 * @param type  either bfs or dfs
+	 * @return List of nodes (as strings) using the DFS/BFS algorithm
+	 */
+	private List<Node<String>> graphSearch(Node<String> start, String algorithmType) {
 		List<Node<String>> arr = new ArrayList<>();
 		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
-		queue.push(start);
+		switch (algorithmType) {
+		case "bfs" -> queue.append(start);
+		case "dfs" -> queue.push(start);
+		}
 		Set<Node<String>> allNodes = adjacencyMap.keySet();
 		while (arr.size() != allNodes.size()) {
 			while (!queue.isEmpty()) {
@@ -262,7 +248,10 @@ public class Graph {
 				Node<Edge<Node<String>>> edgeNode = edgeList.getHead();
 				while (edgeNode != null) {
 					if (!arr.contains(edgeNode.getValue().getTarget())) {
-						queue.push(edgeNode.getValue().getTarget());
+						switch (algorithmType) {
+						case "bfs" -> queue.append(edgeNode.getValue().getTarget());
+						case "dfs" -> queue.push(edgeNode.getValue().getTarget());
+						}
 					}
 					edgeNode = edgeNode.getNext();
 				}
