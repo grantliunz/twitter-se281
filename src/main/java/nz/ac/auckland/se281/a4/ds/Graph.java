@@ -34,9 +34,8 @@ public class Graph {
 
 	/**
 	 * Creates a Graph
-	 * 
-	 * @param edges
-	 *            a list of edges to be added to the graph
+	 *
+	 * @param edges a list of edges to be added to the graph
 	 */
 	public Graph(List<String> edges) {
 		adjacencyMap = new LinkedHashMap<>();
@@ -64,21 +63,18 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a boolean based on whether the
-	 * input sets are reflexive.
-	 * 
+	 * This method returns a boolean based on whether the input sets are reflexive.
+	 * <p>
 	 * TODO: Complete this method (Note a set is not passed in as a parameter but a
 	 * list)
-	 * 
-	 * @param set
-	 *            A list of TwitterHandles
-	 * @param relation
-	 *            A relation between the TwitterHandles
+	 *
+	 * @param set      A list of TwitterHandles
+	 * @param relation A relation between the TwitterHandles
 	 * @return true if the set and relation are reflexive
 	 */
 	public boolean isReflexive(List<String> set, List<String> relation) {
-		for(String element : set){
-			if(!relation.contains(element+","+element)){
+		for (String element : set) {
+			if (!relation.contains(element + "," + element)) {
 				return false;
 			}
 		}
@@ -87,27 +83,24 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a boolean based on whether the
-	 * input set is symmetric.
-	 * 
-	 * If the method returns false, then the following must
-	 * be printed to the console:
-	 * "For the graph to be symmetric tuple: " + requiredElement + " MUST be
-	 * present"
-	 * 
+	 * This method returns a boolean based on whether the input set is symmetric.
+	 * <p>
+	 * If the method returns false, then the following must be printed to the
+	 * console: "For the graph to be symmetric tuple: " + requiredElement + " MUST
+	 * be present"
+	 * <p>
 	 * TODO: Complete this method (Note a set is not passed in as a parameter but a
 	 * list)
-	 * 
-	 * @param relation
-	 *            A relation between the TwitterHandles
+	 *
+	 * @param relation A relation between the TwitterHandles
 	 * @return true if the relation is symmetric
 	 */
 	public boolean isSymmetric(List<String> relation) {
-		for(String element: relation){
-			StringBuilder sb=new StringBuilder(element);
+		for (String element : relation) {
+			StringBuilder sb = new StringBuilder(element);
 			sb.reverse();
-			if(!relation.contains(sb.toString())){
-				System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n",sb.toString()) ;
+			if (!relation.contains(sb.toString())) {
+				System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n", sb.toString());
 				return false;
 			}
 		}
@@ -115,30 +108,28 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a boolean based on whether the
-	 * input set is transitive.
-	 * 
-	 * If the method returns false, then the following must
-	 * be printed to the console:
-	 * "For the graph to be transitive tuple: " + requiredElement + " MUST be
-	 * present"
-	 * 
+	 * This method returns a boolean based on whether the input set is transitive.
+	 * <p>
+	 * If the method returns false, then the following must be printed to the
+	 * console: "For the graph to be transitive tuple: " + requiredElement + " MUST
+	 * be present"
+	 * <p>
 	 * TODO: Complete this method (Note a set is not passed in as a parameter but a
 	 * list)
-	 * 
-	 * @param relation
-	 *            A relation between the TwitterHandles
+	 *
+	 * @param relation A relation between the TwitterHandles
 	 * @return true if the relation is transitive
 	 */
 	public boolean isTransitive(List<String> relation) {
-		for(String element:relation){
-			String nodeA = element.substring(0,1);
+		for (String element : relation) {
+			String nodeA = element.substring(0, 1);
 			String nodeB = element.substring(2);
-			for(String element1:relation){
-				if(element1.substring(0, 1).equals(nodeB)){
+			for (String element1 : relation) {
+				if (element1.substring(0, 1).equals(nodeB)) {
 					String nodeC = element1.substring(2);
-					if(!relation.contains(nodeA + "," + nodeC )){
-						System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n",nodeA + "," + nodeC ) ;
+					if (!relation.contains(nodeA + "," + nodeC)) {
+						System.out.printf("For the graph to be symmetric tuple: %s MUST be present \n",
+								nodeA + "," + nodeC);
 						return false;
 					}
 				}
@@ -150,48 +141,42 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a boolean based on whether the
-	 * input sets are anti-symmetric
-	 * TODO: Complete this method (Note a set is not passed in as a parameter but a
-	 * list)
-	 * 
-	 * @param set
-	 *            A list of TwitterHandles
-	 * @param relation
-	 *            A relation between the TwitterHandles
+	 * This method returns a boolean based on whether the input sets are
+	 * anti-symmetric TODO: Complete this method (Note a set is not passed in as a
+	 * parameter but a list)
+	 *
+	 * @param set      A list of TwitterHandles
+	 * @param relation A relation between the TwitterHandles
 	 * @return true if the set and relation are anti-symmetric
 	 */
 	public boolean isEquivalence(List<String> set, List<String> relation) {
-		return(isReflexive(set,relation) && isSymmetric(relation) && isTransitive(relation));
+		return (isReflexive(set, relation) && isSymmetric(relation) && isTransitive(relation));
 	}
 
 	/**
 	 * This method returns a List of the equivalence class
-	 * 
-	 * If the method can not find the equivalence class, then
-	 * The following must be printed to the console:
-	 * "Can't compute equivalence class as this is not an equivalence relation"
-	 * 
+	 * <p>
+	 * If the method can not find the equivalence class, then The following must be
+	 * printed to the console: "Can't compute equivalence class as this is not an
+	 * equivalence relation"
+	 * <p>
 	 * TODO: Complete this method (Note a set is not passed in as a parameter but a
 	 * list)
-	 * 
-	 * @param node
-	 *            A "TwitterHandle" in the graph
-	 * @param set
-	 *            A list of TwitterHandles
-	 * @param relation
-	 *            A relation between the TwitterHandles
+	 *
+	 * @param node     A "TwitterHandle" in the graph
+	 * @param set      A list of TwitterHandles
+	 * @param relation A relation between the TwitterHandles
 	 * @return List that is the equivalence class
 	 */
 	public List<String> computeEquivalence(String node, List<String> set, List<String> relation) {
 
-		if(!isEquivalence(set, relation)){
+		if (!isEquivalence(set, relation)) {
 			System.out.println("Can't compute equivalence class as this is not an equivalence relation");
 			return null;
 		}
 		List<String> eqClass = new ArrayList<>();
-		for(String element : relation){
-			if(element.substring(0,1).equals(node)){
+		for (String element : relation) {
+			if (element.substring(0, 1).equals(node)) {
 				eqClass.add(element.substring(2));
 			}
 		}
@@ -199,9 +184,9 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a List nodes using
-	 * the BFS (Breadth First Search) algorithm
-	 * 
+	 * This method returns a List nodes using the BFS (Breadth First Search)
+	 * algorithm
+	 *
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch() {
@@ -209,11 +194,10 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a List nodes using
-	 * the BFS (Breadth First Search) algorithm
-	 * 
-	 * @param start
-	 *            A "TwitterHandle" in the graph
+	 * This method returns a List nodes using the BFS (Breadth First Search)
+	 * algorithm
+	 *
+	 * @param start A "TwitterHandle" in the graph
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
@@ -221,7 +205,7 @@ public class Graph {
 		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
 		queue.append(start);
 		Set<Node<String>> allNodes = adjacencyMap.keySet();
-		while(arr.size()!= allNodes.size()) {
+		while (arr.size() != allNodes.size()) {
 			while (!queue.isEmpty()) {
 				Node<String> node = queue.pop();
 				if (!arr.contains(node)) {
@@ -236,24 +220,21 @@ public class Graph {
 					edgeNode = edgeNode.getNext();
 				}
 
-
 			}
-			for(Node<String> n : allNodes){
-				if(!arr.contains(n)){
+			for (Node<String> n : allNodes) {
+				if (!arr.contains(n)) {
 					queue.append(n);
 					break;
 				}
 			}
 		}
 
-
 		return arr;
 	}
 
 	/**
-	 * This method returns a List nodes using
-	 * the DFS (Depth First Search) algorithm
-	 * 
+	 * This method returns a List nodes using the DFS (Depth First Search) algorithm
+	 *
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch() {
@@ -261,11 +242,9 @@ public class Graph {
 	}
 
 	/**
-	 * This method returns a List nodes using
-	 * the DFS (Depth First Search) algorithm
-	 * 
-	 * @param start
-	 *            A "TwitterHandle" in the graph
+	 * This method returns a List nodes using the DFS (Depth First Search) algorithm
+	 *
+	 * @param start A "TwitterHandle" in the graph
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch(Node<String> start, boolean rooted) {
@@ -273,7 +252,7 @@ public class Graph {
 		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
 		queue.push(start);
 		Set<Node<String>> allNodes = adjacencyMap.keySet();
-		while(arr.size()!= allNodes.size()) {
+		while (arr.size() != allNodes.size()) {
 			while (!queue.isEmpty()) {
 				Node<String> node = queue.pop();
 				if (!arr.contains(node)) {
@@ -288,16 +267,14 @@ public class Graph {
 					edgeNode = edgeNode.getNext();
 				}
 
-
 			}
-			for(Node<String> n : allNodes){
-				if(!arr.contains(n)){
+			for (Node<String> n : allNodes) {
+				if (!arr.contains(n)) {
 					queue.push(n);
 					break;
 				}
 			}
 		}
-
 
 		return arr;
 	}
