@@ -1,12 +1,12 @@
 package nz.ac.auckland.se281.a4;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-import nz.ac.auckland.se281.a4.ds.Edge;
 import nz.ac.auckland.se281.a4.ds.Graph;
-import nz.ac.auckland.se281.a4.ds.LinkedList;
 import nz.ac.auckland.se281.a4.ds.Node;
-import nz.ac.auckland.se281.a4.ds.NodesStackAndQueue;
 
 //*******************************
 //YOU SHOUD MODIFY THE SPECIFIED 
@@ -33,9 +33,9 @@ public class TweetGraph extends Graph {
 		return nodeTweets.get(n);
 	}
 
-	public List<String> getTweetsTexts(TwitterHandle n){
+	public List<String> getTweetsTexts(TwitterHandle n) {
 		List<String> texts = new ArrayList<>(); // Only allowed to use ArrayList HERE !!!
-		for(Tweet t : getTweets(n)){
+		for (Tweet t : getTweets(n)) {
 			texts.add(t.getTextString());
 		}
 		return texts;
@@ -43,21 +43,19 @@ public class TweetGraph extends Graph {
 
 	// search for a keyword in a tweet starting from a given node
 	public String searchTweet(TwitterHandle user, String tweetKeyword) {
-		List<Node<String>> userList = depthFirstSearch(user, false);
+		List<Node<String>> userList = depthFirstSearch(user, true);
 		for (Node<String> node : userList) {
 			TwitterHandle handle = (TwitterHandle) node;
 			List<String> tweets = getTweetsTexts(handle);
-			for(String tweet : tweets){
-				if(tweet.contains(tweetKeyword)){
-					return "The tweet string found is: " + tweet + "\nUser " + handle.getName() + " {" + handle.getID() + "} tweeted " + tweetKeyword;
+			for (String tweet : tweets) {
+				if (tweet.contains(tweetKeyword)) {
+					return "The tweet string found is: " + tweet + "\nUser " + handle.getName() + " {" + handle.getID()
+							+ "} tweeted " + tweetKeyword;
 				}
 			}
 
 		}
 		return "No successor of " + user.toString() + "tweeted " + tweetKeyword;
 
-
 	}
 }
-
-

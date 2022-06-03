@@ -170,6 +170,9 @@ public class Graph {
 	 */
 	public List<String> computeEquivalence(String node, List<String> set, List<String> relation) {
 
+		if (!set.contains(node)) {
+			return null;
+		}
 		if (!isEquivalence(set, relation)) {
 			System.out.println("Can't compute equivalence class as this is not an equivalence relation");
 			return null;
@@ -201,7 +204,7 @@ public class Graph {
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
-		return graphSearch(start, "bfs");
+		return graphSearch(start, "bfs", rooted);
 	}
 
 	/**
@@ -220,17 +223,17 @@ public class Graph {
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch(Node<String> start, boolean rooted) {
-		return graphSearch(start, "dfs");
+		return graphSearch(start, "dfs", rooted);
 	}
 
 	/**
 	 * Searches the graph based with either dfs or bfs, implementing a node/queue
 	 *
-	 * @param start A "TwitterHandle" in the graph
-	 * @param type  either bfs or dfs
+	 * @param start         A "TwitterHandle" in the graph
+	 * @param algorithmType either bfs or dfs
 	 * @return List of nodes (as strings) using the DFS/BFS algorithm
 	 */
-	private List<Node<String>> graphSearch(Node<String> start, String algorithmType) {
+	private List<Node<String>> graphSearch(Node<String> start, String algorithmType, boolean rooted) {
 		List<Node<String>> arr = new ArrayList<>();
 		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
 		switch (algorithmType) {
@@ -238,7 +241,7 @@ public class Graph {
 		case "dfs" -> queue.push(start);
 		}
 		Set<Node<String>> allNodes = adjacencyMap.keySet();
-		while (arr.size() != allNodes.size()) {
+		do {
 			while (!queue.isEmpty()) {
 				Node<String> node = queue.pop();
 				if (!arr.contains(node)) {
@@ -257,13 +260,16 @@ public class Graph {
 				}
 
 			}
-			for (Node<String> n : allNodes) {
-				if (!arr.contains(n)) {
-					queue.push(n);
-					break;
+			if (!rooted) {
+				for (Node<String> n : allNodes) {
+					if (!arr.contains(n)) {
+						queue.push(n);
+						break;
+					}
 				}
 			}
-		}
+
+		} while (arr.size() != allNodes.size() && !rooted);
 
 		return arr;
 	}
