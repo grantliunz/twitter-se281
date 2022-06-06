@@ -41,7 +41,14 @@ public class TweetGraph extends Graph {
 		return texts;
 	}
 
-	// search for a keyword in a tweet starting from a given node
+
+	/**
+	 * search for a keyword in a tweet starting from a given node
+	 *
+	 * @param user         the user the search starts from
+	 * @param tweetKeyword the keyword searching for
+	 * @return A string that describes the tweet found
+	 */
 	public String searchTweet(TwitterHandle user, String tweetKeyword) {
 		List<Node<String>> userList = depthFirstSearch(user, true);
 		for (Node<String> node : userList) {
@@ -53,7 +60,6 @@ public class TweetGraph extends Graph {
 							+ "} tweeted " + tweetKeyword;
 				}
 			}
-
 		}
 		return "No successor of " + user.toString() + "tweeted " + tweetKeyword;
 

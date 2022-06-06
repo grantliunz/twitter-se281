@@ -200,7 +200,8 @@ public class Graph {
 	 * This method returns a List nodes using the BFS (Breadth First Search)
 	 * algorithm
 	 *
-	 * @param start A "TwitterHandle" in the graph
+	 * @param start  A "TwitterHandle" in the graph
+	 * @param rooted whether the search is rooted or not
 	 * @return List of nodes (as strings) using the BFS algorithm
 	 */
 	public List<Node<String>> breadthFirstSearch(Node<String> start, boolean rooted) {// name to breadthFirstSearch
@@ -219,7 +220,8 @@ public class Graph {
 	/**
 	 * This method returns a List nodes using the DFS (Depth First Search) algorithm
 	 *
-	 * @param start A "TwitterHandle" in the graph
+	 * @param start  A "TwitterHandle" in the graph
+	 * @param rooted whether the search is rooted or not
 	 * @return List of nodes (as strings) using the DFS algorithm
 	 */
 	public List<Node<String>> depthFirstSearch(Node<String> start, boolean rooted) {
@@ -236,6 +238,7 @@ public class Graph {
 	private List<Node<String>> graphSearch(Node<String> start, String algorithmType, boolean rooted) {
 		List<Node<String>> arr = new ArrayList<>();
 		NodesStackAndQueue<Node<String>> queue = new NodesStackAndQueue<>();
+		//BFS and DFS only differ with using either stack or queue
 		switch (algorithmType) {
 		case "bfs" -> queue.append(start);
 		case "dfs" -> queue.push(start);
@@ -249,6 +252,7 @@ public class Graph {
 				}
 				LinkedList<Edge<Node<String>>> edgeList = adjacencyMap.get(node);
 				Node<Edge<Node<String>>> edgeNode = edgeList.getHead();
+				//Traverses each node and addes it to the stack/queue
 				while (edgeNode != null) {
 					if (!arr.contains(edgeNode.getValue().getTarget())) {
 						switch (algorithmType) {
@@ -260,6 +264,7 @@ public class Graph {
 				}
 
 			}
+			//Adds unconnected nodes to queue if search is not rooted
 			if (!rooted) {
 				for (Node<String> n : allNodes) {
 					if (!arr.contains(n)) {
