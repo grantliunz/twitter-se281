@@ -31,22 +31,23 @@ import nz.ac.auckland.se281.a4.ds.*;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-	StudentsTestsForMarking.Task1NodeStackAndQueueTest.class,
-	StudentsTestsForMarking.Task1NodeStackAndQueueGenericsTest.class,
-	StudentsTestsForMarking.Task1NodeStackAndQueueExceptionTest.class,
+		StudentsTestsForMarking.Task1NodeStackAndQueueTest.class,
+		StudentsTestsForMarking.Task1NodeStackAndQueueGenericsTest.class,
+		StudentsTestsForMarking.Task1NodeStackAndQueueExceptionTest.class,
 
-	StudentsTestsForMarking.Task2LinkedListTest.class,
-	StudentsTestsForMarking.Task2LinkedListGenericsTest.class,
+		StudentsTestsForMarking.Task2LinkedListTest.class,
+		StudentsTestsForMarking.Task2LinkedListGenericsTest.class,
+		StudentsTestsForMarking.Task2LinkedListExceptionTest.class,
 
-	StudentsTestsForMarking.Task3ReflexiveTest.class,
-	StudentsTestsForMarking.Task3SymmetricTest.class,
-	StudentsTestsForMarking.Task3TransitiveTest.class,
-	StudentsTestsForMarking.Tast3EquivalenceTest.class,
-	StudentsTestsForMarking.Task3EquivalenceClassTest.class,
-	StudentsTestsForMarking.Task3BFSTest.class,
-	StudentsTestsForMarking.Task3DFSTest.class,
+		StudentsTestsForMarking.Task3ReflexiveTest.class,
+		StudentsTestsForMarking.Task3SymmetricTest.class,
+		StudentsTestsForMarking.Task3TransitiveTest.class,
+		StudentsTestsForMarking.Tast3EquivalenceTest.class,
+		StudentsTestsForMarking.Task3EquivalenceClassTest.class,
+		StudentsTestsForMarking.Task3BFSTest.class,
+		StudentsTestsForMarking.Task3DFSTest.class,
 
-	StudentsTestsForMarking.Task4SearchTweetTest.class,
+		StudentsTestsForMarking.Task4SearchTweetTest.class,
 
 })
 public class StudentsTestsForMarking {
@@ -162,7 +163,7 @@ public class StudentsTestsForMarking {
 		public void T1_14_Append() {
 			NodesStackAndQueue<Double> queue = new NodesStackAndQueue<Double>();
 			queue.append((Double) 4.0);
-			assertEquals(queue.pop(), (Double)(4.0));
+			assertEquals(queue.pop(), (Double) (4.0));
 		}
 
 
@@ -186,7 +187,7 @@ public class StudentsTestsForMarking {
 				fail("Exception thrown: " + e.getMessage());
 			}
 
-			
+
 		}
 
 		@Test()
@@ -385,7 +386,7 @@ public class StudentsTestsForMarking {
 			} catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
 			}
-		
+
 		}
 
 		@Test()
@@ -409,10 +410,6 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3ReflexiveTest {
 
-		ByteArrayOutputStream myOut;
-		PrintStream origOut;
-		GraphUI graphUI;
-
 		static Map<String, Boolean> file2result;
 
 		static {
@@ -421,6 +418,10 @@ public class StudentsTestsForMarking {
 			file2result.put("c.txt", true);
 			file2result.put("f.txt", false);
 		}
+
+		ByteArrayOutputStream myOut;
+		PrintStream origOut;
+		GraphUI graphUI;
 
 		@Before
 		public void setUp() {
@@ -444,7 +445,7 @@ public class StudentsTestsForMarking {
 			try {
 				controller.processCommand("open " + fileName);
 				assertEquals(file2result.get(fileName), controller.processCommand("check " + command).get(1));
-			}  catch (Exception e) {
+			} catch (Exception e) {
 				fail("Exception thrown: " + e.getMessage());
 			}
 		}
@@ -474,16 +475,17 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3SymmetricTest {
 
-		ByteArrayOutputStream myOut;
-		PrintStream origOut;
-
 		static Map<String, Boolean> file2result;
+
 		static {
 			file2result = new HashMap<>();
 			file2result.put("a.txt", false);
 			file2result.put("c.txt", true);
 			file2result.put("f.txt", false);
 		}
+
+		ByteArrayOutputStream myOut;
+		PrintStream origOut;
 
 		@Before
 		public void setUp() {
@@ -535,15 +537,17 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3TransitiveTest {
 
-		ByteArrayOutputStream myOut;
-		PrintStream origOut;
 		static Map<String, Boolean> file2result;
+
 		static {
 			file2result = new HashMap<>();
 			file2result.put("a.txt", false);
 			file2result.put("c.txt", true);
 			file2result.put("f.txt", false);
 		}
+
+		ByteArrayOutputStream myOut;
+		PrintStream origOut;
 
 		@Before
 		public void setUp() {
@@ -594,15 +598,17 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Tast3EquivalenceTest {
 
-		ByteArrayOutputStream myOut;
-		PrintStream origOut;
 		static Map<String, Boolean> file2result;
+
 		static {
 			file2result = new HashMap<>();
 			file2result.put("a.txt", false);
 			file2result.put("c.txt", true);
 			file2result.put("f.txt", false);
 		}
+
+		ByteArrayOutputStream myOut;
+		PrintStream origOut;
 
 		@Before
 		public void setUp() {
@@ -654,15 +660,17 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3EquivalenceClassTest {
 
-		ByteArrayOutputStream myOut;
-		PrintStream origOut;
 		static Map<String, Boolean> file2result;
+
 		static {
 			file2result = new HashMap<>();
 			file2result.put("a.txt", false);
 			file2result.put("c.txt", true);
 			file2result.put("f.txt", false);
 		}
+
+		ByteArrayOutputStream myOut;
+		PrintStream origOut;
 
 		@Before
 		public void setUp() {
@@ -696,8 +704,8 @@ public class StudentsTestsForMarking {
 			graphUI.open(filename);
 			try {
 				TweetGraph tweetGraph = new TweetGraph(graphUI.getRelationElements(), graphUI.loadTweets(),
-					Dataloader.allocateTweetsToUsers(new Graph(graphUI.getRelationElements()).getUsersFromNodes(), graphUI.loadTweets()));
-				
+						Dataloader.allocateTweetsToUsers(new Graph(graphUI.getRelationElements()).getUsersFromNodes(), graphUI.loadTweets()));
+
 				List<String> result = tweetGraph.computeEquivalence(command, graphUI.getSetElements(), graphUI.getRelationElements());
 				Collections.sort(expected);
 				Collections.sort(result);
@@ -716,7 +724,7 @@ public class StudentsTestsForMarking {
 		@Test
 		public void T3_32_C() {
 			runTest("c.txt", "1");
-			runTestGraph("c.txt" , "1", new ArrayList<String>(){{
+			runTestGraph("c.txt", "1", new ArrayList<String>() {{
 				add("2");
 				add("3");
 				add("1");
@@ -734,9 +742,8 @@ public class StudentsTestsForMarking {
 	 */
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3BFSTest {
-		GraphUI graphUI;
-
 		static Map<String, List<TwitterHandle>> file2result_BFS;
+
 		static {
 			file2result_BFS = new HashMap<>();
 			file2result_BFS.put("a.txt", new ArrayList<TwitterHandle>() {
@@ -773,6 +780,8 @@ public class StudentsTestsForMarking {
 			});
 		}
 
+		GraphUI graphUI;
+
 		private void runTest(String fileName) {
 			graphUI.open(fileName);
 			Graph graph = new Graph(graphUI.getRelationElements());
@@ -806,9 +815,8 @@ public class StudentsTestsForMarking {
 	 */
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task3DFSTest {
-		GraphUI graphUI;
-
 		static Map<String, List<TwitterHandle>> file2result_DFS;
+
 		static {
 			file2result_DFS = new HashMap<>();
 			file2result_DFS.put("a.txt", new ArrayList<TwitterHandle>() {
@@ -847,6 +855,8 @@ public class StudentsTestsForMarking {
 			});
 		}
 
+		GraphUI graphUI;
+
 		private void runTest(String fileName) {
 			graphUI.open(fileName);
 			Graph graph = new Graph(graphUI.getRelationElements());
@@ -881,6 +891,7 @@ public class StudentsTestsForMarking {
 	@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 	public static class Task4SearchTweetTest {
 		static Map<String, String> file2result_tweet_search;
+
 		static {
 			file2result_tweet_search = new HashMap<>();
 
@@ -923,7 +934,7 @@ public class StudentsTestsForMarking {
 		public void T3_03_C() {
 			runTest("c.txt", "2", "otter");
 		}
-		
+
 		@Test
 		public void T3_06_F() {
 			runTest("f.txt", "7", "girl");

@@ -135,8 +135,13 @@ public class LinkedList<T> {
 			}
 
 		}
-		n1.setNext(n.getNext());
-		n.setNext(n1);
+		//Sets the new node
+		try {
+			n1.setNext(n.getNext());
+			n.setNext(n1);
+		} catch (NullPointerException e) {
+			throw new InvalidPositionException();
+		}
 
 
 	}
