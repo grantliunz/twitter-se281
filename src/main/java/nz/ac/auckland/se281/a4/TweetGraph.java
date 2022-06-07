@@ -61,7 +61,7 @@ public class TweetGraph extends Graph {
 				}
 			}
 		}
-		return "No successor of " + user.toString() + "tweeted " + tweetKeyword;
+		return "No successor of " + user.getName() + "tweeted " + tweetKeyword;
 
 	}
 }
