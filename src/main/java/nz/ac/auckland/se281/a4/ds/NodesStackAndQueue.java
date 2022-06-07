@@ -19,7 +19,7 @@ public class NodesStackAndQueue<T> {
 
 	/**
 	 * Checks if the stack / queue is empty
-	 * 
+	 *
 	 * @return true if the stack / queue is empty
 	 */
 	public boolean isEmpty() {
@@ -27,11 +27,10 @@ public class NodesStackAndQueue<T> {
 	}
 
 	/**
-	 * Push operation refers to inserting an element in the Top of the stack.
-	 * TODO: Complete this method
-	 * 
-	 * @param element
-	 *            the element to be "pushed"
+	 * Push operation refers to inserting an element in the Top of the stack. TODO:
+	 * Complete this method
+	 *
+	 * @param element the element to be "pushed"
 	 */
 	public void push(T element) {
 		Node<T> n = new Node<T>(element);
@@ -40,20 +39,18 @@ public class NodesStackAndQueue<T> {
 		}
 		head = n;
 
-
 	}
 
 	/**
 	 * pop an element from the top of the stack (removes and returns the tope
-	 * element)
-	 * TODO: Complete this method (Note: You may have to change the return type)
-	 * 
+	 * element) TODO: Complete this method (Note: You may have to change the return
+	 * type)
+	 *
 	 * @return object of the top element
-	 * @throws EmptyStackException
-	 *             if the stack is empty
+	 * @throws EmptyStackException if the stack is empty
 	 */
 	public T pop() throws EmptyStackException {
-		if(isEmpty()){
+		if (isEmpty()) {
 			throw new EmptyStackException();
 		}
 
@@ -64,15 +61,14 @@ public class NodesStackAndQueue<T> {
 	}
 
 	/**
-	 * get the element from the top of the stack without removing it
-	 * TODO: Complete this method (Note: You may have to change the return type)
+	 * get the element from the top of the stack without removing it TODO: Complete
+	 * this method (Note: You may have to change the return type)
 	 *
 	 * @return the value of the top element
-	 * @throws EmptyStackException
-	 *             if the stack is empty
+	 * @throws EmptyStackException if the stack is empty
 	 */
 	public T peek() throws EmptyStackException {
-		if(isEmpty()){
+		if (isEmpty()) {
 			throw new EmptyStackException();
 		}
 		return head.getValue();
@@ -80,19 +76,17 @@ public class NodesStackAndQueue<T> {
 	}
 
 	/**
-	 * append an element at the end of the queue
-	 * TODO: Complete this method
+	 * append an element at the end of the queue TODO: Complete this method
 	 *
-	 * @param element
-	 *            the element to be appended
+	 * @param element the element to be appended
 	 */
 	public void append(T element) {
 		Node<T> n = new Node<T>(element);
-		if(isEmpty()){
+		if (isEmpty()) {
 			head = n;
-		}else{
+		} else {
 			Node<T> i = head;
-			while(i.getNext() != null){
+			while (i.getNext() != null) {
 				i = i.getNext();
 			}
 			i.setNext(n);

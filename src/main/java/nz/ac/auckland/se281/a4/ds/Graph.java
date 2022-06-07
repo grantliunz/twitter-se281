@@ -233,6 +233,7 @@ public class Graph {
 	 *
 	 * @param start         A "TwitterHandle" in the graph
 	 * @param algorithmType either bfs or dfs
+	 * @param rooted        whether search is rooted or not
 	 * @return List of nodes (as strings) using the DFS/BFS algorithm
 	 */
 	private List<Node<String>> graphSearch(Node<String> start, String algorithmType, boolean rooted) {
